@@ -4,17 +4,31 @@ namespace App\Http\Controllers;
 
 use App\Models\ArquivoChamado;
 use Illuminate\Http\Request;
+use App\Http\Controllers\BaseController;
+use App\Services\ArquivoChamadoService;
+use Exception;
 
-class ArquivosChamadosController extends Controller
+class ArquivosChamadosController extends BaseController
 {
+    protected $arquivo_chamado_service;
+
+    public function __construct(ArquivoChamadoService $arquivo_chamado_service) {
+        $this->arquivo_chamado_service = $arquivo_chamado_service;
+    }
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function upload(Request $request)
     {
-        //
+        try {
+            $dados = $this->arquivo_chamado_service->upload($request);
+
+            return $this->sendResponse($dados, null, 201);
+        } catch (Exception $e) {
+            return $this->sendError($e->getMessage(), null, 500);
+        }
     }
 
     /**
@@ -22,9 +36,15 @@ class ArquivosChamadosController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function download($arquivo_id)
     {
-        //
+        try {
+            $dados = $this->arquivo_chamado_service->download($arquivo_id);
+
+            return $this->sendResponse($dados, null, 201);
+        } catch (Exception $e) {
+            return $this->sendError($e->getMessage(), null, 500);
+        }
     }
 
     /**
@@ -33,53 +53,14 @@ class ArquivosChamadosController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function delete($arquivo_id)
     {
-        //
-    }
+        try {
+            $dados = $this->arquivo_chamado_service->delete($arquivo_id);
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\ArquivoChamado  $arquivoChamado
-     * @return \Illuminate\Http\Response
-     */
-    public function show(ArquivoChamado $arquivoChamado)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\ArquivoChamado  $arquivoChamado
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(ArquivoChamado $arquivoChamado)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\ArquivoChamado  $arquivoChamado
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, ArquivoChamado $arquivoChamado)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\ArquivoChamado  $arquivoChamado
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(ArquivoChamado $arquivoChamado)
-    {
-        //
+            return $this->sendResponse($dados, null, 201);
+        } catch (Exception $e) {
+            return $this->sendError($e->getMessage(), null, 500);
+        }
     }
 }

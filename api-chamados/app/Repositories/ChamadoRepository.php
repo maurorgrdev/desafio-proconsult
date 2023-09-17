@@ -18,7 +18,6 @@ class ChamadoRepository
     }
 
     public function createChamado(array $dados){
-        print_r($dados);
         return Chamado::create($dados);
     }
 

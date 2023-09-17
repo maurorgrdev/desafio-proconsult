@@ -44,7 +44,7 @@ class ArquivoChamadoService
         return response()->file($arquivo);
     }
 
-    public function deleteArquivo($arquivo_chamado_id){
+    public function delete($arquivo_chamado_id){
         $arquivo = $this->arquivo_chamado_repository->getArquivoChamadoById($arquivo_chamado_id);
 
         Storage::delete($arquivo->path. '/'. $arquivo->chamado_id. '/'. $arquivo->filename);

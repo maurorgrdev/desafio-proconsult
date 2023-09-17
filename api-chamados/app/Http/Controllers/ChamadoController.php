@@ -6,8 +6,9 @@ use Illuminate\Http\Request;
 use App\Services\ChamadoService;
 use Exception;
 use Illuminate\Http\JsonResponse;
+use App\Http\Controllers\BaseController;
 
-class ChamadoController extends Controller
+class ChamadoController extends BaseController
 {
     protected $chamado_service;
 
@@ -21,7 +22,9 @@ class ChamadoController extends Controller
      */
     public function index()
     {
-        return $this->chamado_service->findAll();
+        $dados = $this->chamado_service->findAll();
+
+        return $this->sendResponse($dados);
     }
 
     /**
@@ -32,18 +35,13 @@ class ChamadoController extends Controller
      */
     public function store(Request $request): JsonResponse
     {
-        $result = ['status' => 200];
-
         try {
-            $result['data'] = $this->chamado_service->create($request);
+            $result = $this->chamado_service->create($request);
+
+            return $this->sendResponse($result, 'Registro feito com sucesso', 201);
         } catch (Exception $e) {
-            $result = [
-                'status' => 500,
-                'error' => $e->getMessage(),
-            ];
+            return $this->sendError($e->getMessage(), null, $code = 500);
         }
-        
-        return response()->json($result, $result['status']);
     }
 
     /**
@@ -54,7 +52,13 @@ class ChamadoController extends Controller
      */
     public function show($id)
     {
-        return $this->chamado_service->findById($id);
+        try {
+            $dados = $this->chamado_service->findById($id);
+
+            return $this->sendResponse($dados, null, 200);
+        } catch (Exception $e) {
+            return $this->sendError($e->getMessage(), null, $code = 500);
+        }
     }
 
     /**
@@ -66,6 +70,12 @@ class ChamadoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        return $this->chamado_service->edit($request, $id);
+        try {
+            $result = $this->chamado_service->edit($request, $id);
+
+            return $this->sendResponse($result, 'Registro atualizado com sucesso', 201);
+        } catch (Exception $e) {
+            return $this->sendError($e->getMessage(), null, $code = 500);
+        }
     }
 }
