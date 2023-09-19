@@ -36,7 +36,7 @@
         <q-item-label
           header
         >
-          {{ usuarioStore.usuario.name}}
+          {{ usuarioStore.usuario.name == null ? usuarioStore.usuario.name : ''}}
         </q-item-label>
 
         <q-item clickable>
@@ -81,7 +81,8 @@ export default defineComponent({
   methods: {
     async logoutUser(){
       await this.usuarioStore.logout();
-      this.$router.push('/login');
+
+      await this.$router.push('/login');
     }
   },
 })

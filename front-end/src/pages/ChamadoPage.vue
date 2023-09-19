@@ -58,7 +58,6 @@
 </template>
 
 <script>
-// import TableComponente from 'components/TableComponente.vue';
 import { useChamadoStore } from 'src/stores/chamado'
 import { useUsuarioStore } from 'src/stores/user'
 import ChamadoCreateDialog from './Chamado/ChamadoCreateDialog.vue'

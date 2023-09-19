@@ -124,7 +124,6 @@ export default
     methods: {
         clickCancel()
         {
-            console.log(this.arquivo);
             this.showDialog = false
             this.$emit('closeDialog');
         },
@@ -140,7 +139,6 @@ export default
                 descricao: this.descricao,
             }
 
-            console.log(Object.keys(this.arquivo).length);
             if(!(Object.keys(this.arquivo).length === 0)){
                 await this.uploadArquivoChamado(this.arquivo, this.dados.id);
             }
@@ -151,7 +149,7 @@ export default
                 this.showDialog = false
                 this.$emit('updateSuccess');
             } else {
-                console.log(response);
+                alert('Erro ao responder chamado.')
             }
         },
 

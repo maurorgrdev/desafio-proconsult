@@ -136,8 +136,6 @@ export default
         this.descricao_colaborador = this.dados.colaborador_resposta
         this.descricao_cliente = this.dados.cliente_resposta
 
-        console.log(this.dados.cliente_arquivo);
-        console.log(this.dados.colaborador_arquivo);
         /**
          * Recuperar arquivo do colaborador
         */

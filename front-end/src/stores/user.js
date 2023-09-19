@@ -61,8 +61,13 @@ export const useUsuarioStore = defineStore("usuario", {
 
         async logout(){
             try {
-                this.usuario = {};
-                await localStorage.removeItem("token");
+                this.usuario = null;
+                this.usuarios = null;
+                
+                localStorage.setItem("token", '');
+                
+                router.push('/login');
+                
             } catch (error) {
                 return false;
             }
