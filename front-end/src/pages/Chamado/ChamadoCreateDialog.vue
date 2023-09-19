@@ -5,7 +5,7 @@
                 <div class="row">
                     <div class="col-12">
                         <q-input 
-                            filled 
+                            outlined 
                             v-model="titulo" 
                             label="Título *" 
                             :rules="[ 
@@ -20,7 +20,7 @@
                         <q-input
                             label="Descrição *"
                             v-model="descricao"
-                            filled
+                            outlined
                             type="textarea"
                             :rules="[ 
                                 val => val && val.length > 0 || 
@@ -95,7 +95,6 @@ export default
                 
                 const response = await this.chamadoStore.addChamado(data);
                 
-                console.log(response);
                 if(response.status === 201){
                     this.showDialog = false
                     this.$emit('createSuccess');

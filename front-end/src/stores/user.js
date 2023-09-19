@@ -5,11 +5,16 @@ export const useUsuarioStore = defineStore("usuario", {
     persist: true,
     state: () => ({
         usuario: {},
+        usuarios: [],
     }),
     getters: {
-      getUsuario(state){
+        getUsuario(state){
           return state.usuario
-        }
+        },
+
+        getUsuarios(state){
+            return state.usuarios;
+        },
     },
     actions: {
         async login(data){
@@ -29,11 +34,11 @@ export const useUsuarioStore = defineStore("usuario", {
             }
         },
 
-        async loadUsuario(){
+        async loadUsuarios(){
             try {
-                const response = await api.get('/user/show-user-log');
-                
-                this.usuario = response.data;
+                const result = await api.get('/users')
+
+                this.usuarios = result.data.data
 
                 return true;
             } catch (error) {
@@ -41,6 +46,18 @@ export const useUsuarioStore = defineStore("usuario", {
                 return false;
             }
         },
+
+        async addUsuario(data){
+            try {
+              const response = await api.post('/users', data);
+    
+              return response;
+    
+            } catch (error) {
+              
+              return error.response;
+            }
+          },
 
         async logout(){
             try {

@@ -21,6 +21,7 @@ class DatabaseSeeder extends Seeder
             'email' => 'admin@gmail.com',
             'type' => 'admin',
             'password' => bcrypt('senha'),
+            'cpf' => '11806583887',
         ]);
     }
 }

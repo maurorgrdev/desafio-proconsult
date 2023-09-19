@@ -12,7 +12,7 @@
         />
 
         <q-toolbar-title>
-          Quasar App
+          Chamados
         </q-toolbar-title>
 
         <div>
@@ -36,7 +36,7 @@
         <q-item-label
           header
         >
-          Menu
+          {{ usuarioStore.usuario.name}}
         </q-item-label>
 
         <q-item clickable>
@@ -57,20 +57,6 @@
 <script>
 import { defineComponent, ref } from 'vue'
 import { useUsuarioStore } from 'src/stores/user'
-// import EssentialLink from 'components/EssentialLink.vue'
-
-const linksList = [
-  {
-    title: 'Chamados',
-    icon: 'code',
-    link: '/chamados'
-  },
-  {
-    title: 'Usuários',
-    icon: 'code',
-    link: 'users'
-  },
-]
 
 export default defineComponent({
   name: 'MainLayout',
@@ -84,7 +70,6 @@ export default defineComponent({
     const usuarioStore = useUsuarioStore()
 
     return {
-      essentialLinks: linksList,
       leftDrawerOpen,
       toggleLeftDrawer () {
         leftDrawerOpen.value = !leftDrawerOpen.value

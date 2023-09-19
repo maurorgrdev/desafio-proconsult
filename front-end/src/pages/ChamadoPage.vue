@@ -51,7 +51,7 @@
         </template>
         <template v-slot:top>
             <q-space />
-            <q-btn v-show="userStore.usuario.type == 'cliente'" color="primary" label="NOVO CHAMADO"  @click="openDialogNovoChamado"/>
+            <q-btn v-if="(this.userStore.usuario.type == 'cliente')" color="primary" label="NOVO CHAMADO"  @click="openDialogNovoChamado"/>
           </template>
       </q-table>
     </q-page>

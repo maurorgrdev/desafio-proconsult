@@ -27,7 +27,7 @@ class UserService
 
     public function save(Request $request){        
         $data = $request->only([
-            'name', 'email', 'password', 'type'
+            'name', 'email', 'password', 'type', 'cpf'
         ]);
 
         $data['password'] = Hash::make($request->password);
