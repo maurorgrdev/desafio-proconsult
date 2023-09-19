@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ArquivosChamadosController;
 use App\Http\Controllers\ChamadoController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
@@ -16,9 +17,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum', 'abilities:cliente')->group(function () {
+Route::middleware('auth:sanctum', 'ability:cliente,colaborador')->group(function () {
     Route::resource('/chamados', ChamadoController::class);
+
+    Route::get('/arquivo-chamado/download/{arquivo_id}', [ArquivosChamadosController::class, 'download']);
+    Route::delete('/arquivo-chamado/delete/{arquivo_id}', [ArquivosChamadosController::class, 'delete']);
+    Route::post('/arquivo-chamado/upload', [ArquivosChamadosController::class, 'upload']);
 });
 
 Route::resource('/users', UserController::class);
+
 Route::post('/login', [UserController::class, 'login']);

@@ -26,6 +26,7 @@ class ChamadoResource extends JsonResource
         return [
             'id' => $this->id,
             'titulo' => $this->titulo,
+            'descricao' => $this->descricao,
             'status' =>  $this->status,
             'cliente_id' => $this->cliente_id,
             'cliente_nome' => $this->cliente_nome,
@@ -33,7 +34,6 @@ class ChamadoResource extends JsonResource
             'colaborador_id' => $this->colaborador_id,
             'colaborador_nome' => $this->colaborador_nome,
             'colaborador_resposta' => $this->colaborador_resposta,
-            // PIPIPIPOPOPO 
             'cliente_arquivo' => $arquivo_cliente ? $arquivo_cliente : null,
             'colaborador_arquivo' => $arquivo_colaborador ? $arquivo_colaborador : null,
         ];

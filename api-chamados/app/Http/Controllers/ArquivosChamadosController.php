@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\ArquivoChamado;
 use Illuminate\Http\Request;
-use App\Http\Controllers\BaseController;
+use App\Http\Controllers\BaseController as BaseController;
 use App\Services\ArquivoChamadoService;
 use Exception;
 
@@ -41,7 +41,7 @@ class ArquivosChamadosController extends BaseController
         try {
             $dados = $this->arquivo_chamado_service->download($arquivo_id);
 
-            return $this->sendResponse($dados, null, 201);
+            return response()->file($dados);
         } catch (Exception $e) {
             return $this->sendError($e->getMessage(), null, 500);
         }

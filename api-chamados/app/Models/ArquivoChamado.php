@@ -36,10 +36,10 @@ class ArquivoChamado extends Model
      * @var array
      */
     protected $fillable = [
-        'name' => '',
-        'path' => '',
-        'filename' => '',
-        'chamado_id' => '',
-        'usuario_id' => '',
+        'name',
+        'path',
+        'filename',
+        'chamado_id',
+        'usuario_id',
     ];
 }

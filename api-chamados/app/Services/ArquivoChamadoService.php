@@ -20,7 +20,7 @@ class ArquivoChamadoService
     {
         $usuario_logado = Auth::user();
 
-        $path_final = Storage::disk('local')->put('chamado/'. $usuario_logado->perfil.'/' . $request->chamado_id. '/' , $request->file('file'));
+        $path_final = Storage::disk('local')->put('chamado/'. $usuario_logado->type .'/' . $request->chamado_id. '/' , $request->file('file'));
         
         $array_name_file = explode("/", $path_final);
 
@@ -29,7 +29,7 @@ class ArquivoChamadoService
             'chamado_id' => $request->chamado_id,
             'name' => $request->name,
             'filename' => $array_name_file[(count($array_name_file) - 1)],
-            'path' => 'chamado/'. $usuario_logado->perfil,
+            'path' => 'chamado/'. $usuario_logado->type,
         );
 
         return $this->arquivo_chamado_repository->createArquivoChamado($upload);
@@ -41,7 +41,7 @@ class ArquivoChamadoService
         
         $arquivo = Storage::path($arquivo->path. '/'. $arquivo->chamado_id. '/'. $arquivo->filename);
 
-        return response()->file($arquivo);
+        return $arquivo;
     }
 
     public function delete($arquivo_chamado_id){

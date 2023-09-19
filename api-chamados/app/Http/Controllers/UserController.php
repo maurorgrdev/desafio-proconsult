@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Services\UserService;
-use App\Http\Controllers\BaseController;
+use App\Http\Controllers\BaseController as BaseController;
 use Exception;
 use Illuminate\Http\JsonResponse;
 
@@ -50,14 +50,8 @@ class UserController extends BaseController
      * 
      * @param \Illuminate\Http\Request  $request
      */
-    public function login(Request $request): JsonResponse
+    public function login(Request $request)
     {
-        try {
-            $dados = $this->user_service->login($request);
-
-            return $this->sendResponse($dados, null, null);
-        } catch (Exception $e) {
-            return $this->sendError($e->getMessage(), null, 500);
-        }
+        return $this->user_service->login($request);
     }
 }

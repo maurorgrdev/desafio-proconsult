@@ -6,7 +6,8 @@ use Illuminate\Http\Request;
 use App\Services\ChamadoService;
 use Exception;
 use Illuminate\Http\JsonResponse;
-use App\Http\Controllers\BaseController;
+use App\Http\Controllers\BaseController as BaseController;
+use App\Http\Resources\ChamadoResource;
 
 class ChamadoController extends BaseController
 {
@@ -24,7 +25,7 @@ class ChamadoController extends BaseController
     {
         $dados = $this->chamado_service->findAll();
 
-        return $this->sendResponse($dados);
+        return $this->sendResponse(ChamadoResource::collection($dados));
     }
 
     /**
@@ -40,7 +41,7 @@ class ChamadoController extends BaseController
 
             return $this->sendResponse($result, 'Registro feito com sucesso', 201);
         } catch (Exception $e) {
-            return $this->sendError($e->getMessage(), null, $code = 500);
+            return $this->sendError($e->getMessage(), null, $code = 400);
         }
     }
 
@@ -55,9 +56,9 @@ class ChamadoController extends BaseController
         try {
             $dados = $this->chamado_service->findById($id);
 
-            return $this->sendResponse($dados, null, 200);
+            return $this->sendResponse($dados,);
         } catch (Exception $e) {
-            return $this->sendError($e->getMessage(), null, $code = 500);
+            return $this->sendError($e->getMessage(), null, $code = 400);
         }
     }
 
@@ -73,9 +74,9 @@ class ChamadoController extends BaseController
         try {
             $result = $this->chamado_service->edit($request, $id);
 
-            return $this->sendResponse($result, 'Registro atualizado com sucesso', 201);
+            return $this->sendResponse($result, 'Registro atualizado com sucesso', 200);
         } catch (Exception $e) {
-            return $this->sendError($e->getMessage(), null, $code = 500);
+            return $this->sendError($e->getMessage(), null, $code = 400);
         }
     }
 }
