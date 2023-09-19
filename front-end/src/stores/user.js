@@ -61,11 +61,11 @@ export const useUsuarioStore = defineStore("usuario", {
 
         async logout(){
             try {
-                this.usuario = null;
-                this.usuarios = null;
+                this.usuario = {};
+                this.usuarios = [];
                 
                 localStorage.setItem("token", '');
-                
+
                 router.push('/login');
                 
             } catch (error) {

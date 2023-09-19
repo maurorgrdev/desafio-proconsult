@@ -36,7 +36,7 @@
         <q-item-label
           header
         >
-          {{ usuarioStore.usuario.name == null ? usuarioStore.usuario.name : ''}}
+          {{ usuarioStore.usuario.name }}
         </q-item-label>
 
         <q-item clickable>

@@ -9,7 +9,7 @@
         <q-table 
         flat bordered 
         title="Usuários" 
-        :rows="userStore.getUsuarios" 
+        :rows="usuarios" 
         :columns="columns" 
         row-key="id" 
       >
@@ -48,7 +48,6 @@ export default {
         const userStore = useUsuarioStore()
 
         return {
-            // chamadoStore,
             userStore,
         }
     },
@@ -71,12 +70,14 @@ export default {
 
             showDialogNovoUsuario: false,
 
-            dadosChamado: {},
+            usuarios: [],
         }
     },
 
     async mounted() {
         await this.userStore.loadUsuarios();
+
+        this.usuarios = this.userStore.getUsuarios;
     },
 
     methods: {
